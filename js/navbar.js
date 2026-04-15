@@ -41,4 +41,15 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
+  // Close menu when clicking a regular link (so user returns to page)
+  const menuLinks = menu.querySelectorAll('a:not(.dropbtn)');
+  menuLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (window.innerWidth <= 768 && menu.classList.contains('open')) {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
 });
