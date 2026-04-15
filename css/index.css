@@ -1323,6 +1323,7 @@ html {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* asegurar que ocupe toda la pantalla */
+    padding-top: 64px; /* reservar espacio para navbar reducido en móvil */
   }
 
   /* main.content (envuelto en index.html) ya existente en CSS; forzamos que crezca */
@@ -1349,7 +1350,7 @@ html {
   .nav-toggle .bar { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: transform 220ms ease, opacity 180ms ease; }
 
   /* Ajustes de layout del header en móvil para que los botones queden juntos */
-  .navbar { justify-content: flex-start; gap: 12px; padding: 12px 16px; }
+  .navbar { justify-content: flex-start; gap: 12px; padding: 8px 12px; height: 64px; }
   .btn-outline { order: 2; margin-left: 0; }
   .nav-actions { display: flex; gap: 8px; align-items: center; position: relative; z-index: 1102; }
   /* push actions to the right but keep them grouped */
@@ -1358,6 +1359,10 @@ html {
   /* ensure hamburger bars and actions sit above navbar pseudo-element */
   .nav-toggle, .nav-actions { position: relative; }
   .nav-toggle { z-index: 1200; }
+  /* Force hamburger visible and clickable: place it absolute to the right of the header */
+  .nav-toggle { display: inline-flex !important; position: absolute !important; right: 12px !important; top: 50% !important; transform: translateY(-50%) !important; width:40px; height:40px; align-items:center; justify-content:center; font-size:20px; background: transparent; border: 2px solid rgba(255,255,255,0.12); border-radius: 8px; color: #fff; }
+  /* if button used previous .bar spans, ensure they're hidden */
+  .nav-toggle .bar { display: none !important; }
 
   /* por defecto en móvil convertimos el menu en un panel ocultable */
   .menu {
