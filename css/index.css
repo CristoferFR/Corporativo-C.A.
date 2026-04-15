@@ -1345,8 +1345,15 @@ html {
   .footer { margin-top: 0; }
 
   /* NAVBAR MOBILE: hamburguesa y comportamiento del menú */
-  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 4px; background: transparent; border: none; cursor: pointer; width:44px; height:44px; padding:6px; color: white; z-index: 1101; }
+  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 4px; background: transparent; border: none; cursor: pointer; width:44px; height:44px; padding:6px; color: white; z-index: 1101; order: 3; }
   .nav-toggle .bar { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: transform 220ms ease, opacity 180ms ease; }
+
+  /* Ajustes de layout del header en móvil para que los botones queden juntos */
+  .navbar { justify-content: flex-start; gap: 12px; padding: 12px 16px; }
+  .btn-outline { order: 2; margin-left: 0; }
+  .nav-actions { display: flex; gap: 8px; align-items: center; }
+  /* push actions to the right but keep them grouped */
+  .nav-actions { margin-left: auto; }
 
   /* por defecto en móvil convertimos el menu en un panel ocultable */
   .menu {
@@ -1383,8 +1390,10 @@ html {
   .nav-toggle { -webkit-tap-highlight-color: transparent; }
 
 
-/* Desktop: ocultar el toggle */
-.nav-toggle { display: none; }
+/* Desktop: ocultar el toggle (solo a partir de 769px) */
+@media (min-width: 769px) {
+  .nav-toggle { display: none; }
+}
   /* transform hamburger to X when open */
   .nav-toggle[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
   .nav-toggle[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; }
