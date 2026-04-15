@@ -1345,15 +1345,19 @@ html {
   .footer { margin-top: 0; }
 
   /* NAVBAR MOBILE: hamburguesa y comportamiento del menú */
-  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 4px; background: transparent; border: none; cursor: pointer; width:44px; height:44px; padding:6px; color: white; z-index: 1101; order: 3; }
+  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 4px; background: transparent; border: none; cursor: pointer; width:44px; height:44px; padding:6px; color: white; z-index: 1101; order: 3; position: relative; }
   .nav-toggle .bar { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: transform 220ms ease, opacity 180ms ease; }
 
   /* Ajustes de layout del header en móvil para que los botones queden juntos */
   .navbar { justify-content: flex-start; gap: 12px; padding: 12px 16px; }
   .btn-outline { order: 2; margin-left: 0; }
-  .nav-actions { display: flex; gap: 8px; align-items: center; }
+  .nav-actions { display: flex; gap: 8px; align-items: center; position: relative; z-index: 1102; }
   /* push actions to the right but keep them grouped */
   .nav-actions { margin-left: auto; }
+
+  /* ensure hamburger bars and actions sit above navbar pseudo-element */
+  .nav-toggle, .nav-actions { position: relative; }
+  .nav-toggle { z-index: 1200; }
 
   /* por defecto en móvil convertimos el menu en un panel ocultable */
   .menu {
