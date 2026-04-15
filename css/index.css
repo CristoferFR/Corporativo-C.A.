@@ -580,12 +580,14 @@ body {
 
 @media (max-width: 768px) {
   .footer-container {
+    display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 0 6px;
   }
   .footer {
     padding: 28px 12px;
+    flex-shrink: 0;
   }
   .footer-bottom {
     text-align: left;
@@ -1365,7 +1367,7 @@ html {
   }
 
   /* When open, show as column */
-  .menu.open { display: flex; }
+  .menu.open { display: flex !important; }
 
   /* Ajustes visuales para links en menú móvil */
   .menu > * { height: auto; padding: 10px 8px; }
