@@ -149,6 +149,10 @@ body {
   align-items: center; /* asegurar que los items del menu queden centrados verticalmente */
 }
 
+/* By default hide the mobile-only hamburger and mobile info link (desktop view) */
+.nav-toggle { display: none; }
+.menu .mobile-info-link { display: none; }
+
 .menu > * {
   display: flex;
   align-items: center;
@@ -1353,80 +1357,72 @@ html {
   .navbar { justify-content: flex-start; gap: 12px; padding: 8px 12px; height: 64px; }
   .btn-outline { order: 2; margin-left: 0; }
   .nav-actions { display: flex; gap: 8px; align-items: center; position: relative; z-index: 1102; }
-  /* push actions to the right but keep them grouped */
-  .nav-actions { margin-left: auto; }
+  /* Mobile-only navbar/menu adjustments: keep desktop untouched. */
+  @media (max-width: 768px) {
+    /* push actions to the right but keep them grouped */
+    .nav-actions { margin-left: auto; }
 
-  /* ensure hamburger bars and actions sit above navbar pseudo-element */
-  .nav-toggle, .nav-actions { position: relative; }
-  .nav-toggle { z-index: 1200; }
-  /* Force hamburger visible and clickable: place it absolute to the right of the header */
-  .nav-toggle { display: inline-flex !important; position: absolute !important; right: 12px !important; top: 50% !important; transform: translateY(-50%) !important; width:40px; height:40px; align-items:center; justify-content:center; font-size:20px; background: transparent; border: 2px solid rgba(255,255,255,0.12); border-radius: 8px; color: #fff; }
-  /* if button used previous .bar spans, ensure they're hidden */
-  .nav-toggle .bar { display: none !important; }
+    /* ensure hamburger bars and actions sit above navbar pseudo-element */
+    .nav-toggle, .nav-actions { position: relative; }
+    .nav-toggle { z-index: 1200; }
+    /* Force hamburger visible and clickable on mobile: place it absolute to the right of the header */
+    .nav-toggle { display: inline-flex !important; position: absolute !important; right: 12px !important; top: 50% !important; transform: translateY(-50%) !important; width:40px; height:40px; align-items:center; justify-content:center; font-size:20px; background: transparent; border: 2px solid rgba(255,255,255,0.12); border-radius: 8px; color: #fff; }
+    /* if button used previous .bar spans, ensure they're hidden */
+    .nav-toggle .bar { display: none !important; }
 
-  /* por defecto en móvil convertimos el menu en un panel ocultable */
-  .menu {
-    display: none; /* oculto hasta abrir */
-    position: absolute; /* posicionar debajo de la navbar */
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #111111;
-    flex-direction: column;
-    gap: 0;
-    padding: 12px 16px;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    z-index: 1100; /* encima del resto del contenido */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    overflow: hidden;
+    /* por defecto en móvil convertimos el menu en un panel ocultable */
+    .menu {
+      display: none; /* oculto hasta abrir */
+      position: absolute; /* posicionar debajo de la navbar */
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #111111;
+      flex-direction: column;
+      gap: 0;
+      padding: 12px 16px;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      z-index: 1100; /* encima del resto del contenido */
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      overflow: hidden;
+    }
+
+    /* hide the header 'Más Información' button on mobile; keep a mobile link inside the menu */
+    .nav-actions .btn-outline { display: none; }
+
+    /* style the mobile info link inside the menu to look like a button */
+    .menu .mobile-info-link {
+      display: block;
+      background: transparent;
+      color: #ffea00;
+      text-decoration: none;
+      padding: 10px 12px;
+      font-weight: 700;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      border: 1px solid rgba(255,234,0,0.06);
+    }
+
+    /* When open, show as column */
+    .menu.open { display: flex !important; }
+
+    /* Ajustes visuales para links en menú móvil */
+    .menu > * { height: auto; padding: 10px 8px; }
+    .menu a, .menu .dropbtn { width: 100%; text-align: left; padding: 10px 12px; display: block; }
+
+    /* Convertir dropdowns para comportamiento por click en móvil */
+    .menu .dropdown { width: 100%; }
+    .menu .dropdown .dropdown-content { display: none; position: static; background: rgba(255,255,255,0.02); box-shadow: none; padding: 8px 0; border-radius: 6px; margin: 6px 0 0 0; }
+    .menu .dropdown.open .dropdown-content { display: block; }
+    .menu .dropdown .dropdown-content a { padding-left: 20px; display: block; padding: 8px 12px; }
+
+    /* mobile-specific accessibility tweak */
+    .nav-toggle { -webkit-tap-highlight-color: transparent; }
+
+    /* transform hamburger to X when open */
+    .nav-toggle[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
   }
-
-  /* hide the header 'Más Información' button on mobile; keep a mobile link inside the menu */
-  .nav-actions .btn-outline { display: none; }
-
-  /* style the mobile info link inside the menu to look like a button */
-  .menu .mobile-info-link {
-    display: block;
-    background: transparent;
-    color: #ffea00;
-    text-decoration: none;
-    padding: 10px 12px;
-    font-weight: 700;
-    border-radius: 6px;
-    margin-bottom: 6px;
-    border: 1px solid rgba(255,234,0,0.06);
-  }
-
-  /* When open, show as column */
-  .menu.open { display: flex !important; }
-
-  /* Ajustes visuales para links en menú móvil */
-  .menu > * { height: auto; padding: 10px 8px; }
-  .menu a, .menu .dropbtn { width: 100%; text-align: left; padding: 10px 12px; display: block; }
-
-  /* Convertir dropdowns para comportamiento por click en móvil */
-  .menu .dropdown { width: 100%; }
-  .menu .dropdown .dropdown-content { display: none; position: static; background: rgba(255,255,255,0.02); box-shadow: none; padding: 8px 0; border-radius: 6px; margin: 6px 0 0 0; }
-  .menu .dropdown.open .dropdown-content { display: block; }
-  .menu .dropdown .dropdown-content a { padding-left: 20px; display: block; padding: 8px 12px; }
-
-  /* ocultar el toggle en escritorio (por si hay reglas distintas fuera del media query) */
-  .nav-toggle { -webkit-tap-highlight-color: transparent; }
-
-
-/* Desktop: ocultar el toggle (solo a partir de 769px) */
-@media (min-width: 769px) {
-  .nav-toggle { display: none; }
-}
-  /* transform hamburger to X when open */
-  .nav-toggle[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-  .nav-toggle[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; }
-  .nav-toggle[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-/* Also show a visible hamburger for tablet widths up to 992px */
-@media (max-width: 992px) {
-  .nav-toggle { display: inline-flex !important; position: absolute !important; right: 12px !important; top: 50% !important; transform: translateY(-50%) !important; }
-  .nav-actions { margin-left: auto; }
-}
 
