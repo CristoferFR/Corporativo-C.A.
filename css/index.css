@@ -1382,6 +1382,22 @@ html {
     overflow: hidden;
   }
 
+  /* hide the header 'Más Información' button on mobile; keep a mobile link inside the menu */
+  .nav-actions .btn-outline { display: none; }
+
+  /* style the mobile info link inside the menu to look like a button */
+  .menu .mobile-info-link {
+    display: block;
+    background: transparent;
+    color: #ffea00;
+    text-decoration: none;
+    padding: 10px 12px;
+    font-weight: 700;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    border: 1px solid rgba(255,234,0,0.06);
+  }
+
   /* When open, show as column */
   .menu.open { display: flex !important; }
 
